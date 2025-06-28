@@ -3,11 +3,11 @@ POST http://localhost:8080/api/funding
 Content-Type: application/json
 
 {
-  "title": "테스트 펀딩",
-  "description": "청바지 리디자인 프로젝트",
+  "title": "의성 대잔치",
+  "description": "의성에서 벌어지는 영포티들의 유쾌한 반란",
   "author": "holden",
   "age": "20대",
-  "size": "M",
+  "size": "20",
   "gender": "여성",
   "region": "서울",
   "budget": 500000
