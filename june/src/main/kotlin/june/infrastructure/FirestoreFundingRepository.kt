@@ -63,7 +63,7 @@ fun DocumentSnapshot.toFunding(): Funding? {
         participants = (data["participants"] as List<*>).filterIsInstance<String>(),
         imageUrl = data["imageUrl"] as String?,
         amount = (data["amount"] as Number).toInt(),
-        hashTags = (data["hashTags"] as List<*>).filterIsInstance<String>(),
+        hashtags = (data["hashtags"] as List<*>).filterIsInstance<String>(),
     )
 }
 
@@ -80,5 +80,5 @@ fun Funding.toMap(): Map<String, Any> = mapOf(
     "amount" to amount,
     "participants" to participants,
     "imageUrl" to (imageUrl ?: ""),
-    "hashTags" to hashTags,
+    "hashtags" to hashtags,
 )

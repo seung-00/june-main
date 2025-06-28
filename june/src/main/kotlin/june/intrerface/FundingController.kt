@@ -21,7 +21,7 @@ class FundingController(
         val region: String,
         val budget: Int,
         val imageUrl: String?,
-        val hashTags: List<String>,
+        val hashtags: List<String>,
     )
 
     data class JoinFunding(
@@ -41,7 +41,7 @@ class FundingController(
             region = data.region,
             budget = data.budget,
             imageUrl = data.imageUrl,
-            hashTags = data.hashTags,
+            hashtags = data.hashtags,
         )
 
         val id = fundingRepository.save(funding)
