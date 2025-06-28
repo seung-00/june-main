@@ -1,8 +1,11 @@
 package june.intrerface
 
-import com.google.genai.Client
+import june.application.AiService
+import june.config.HttpClientConfig
 import june.domain.Something
 import june.domain.SomethingRepository
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.*
 
@@ -10,10 +13,10 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin(origins = ["*"])
 @RestController
 class MiscController(
-    private val somethingRepository: SomethingRepository
+    private val somethingRepository: SomethingRepository,
+    private val aiApiClient: OkHttpClient,
+    private val aiService: AiService,
 ) {
-
-    private val client = Client.builder().apiKey("AIzaSyCEVR8Fqk9G7IfcyKdViag4BbslfYmSltI").build()
 
     private val logger = LoggerFactory.getLogger(MiscController::class.java)
 
@@ -66,5 +69,35 @@ class MiscController(
         somethingRepository.delete(Something.Id(id))
 
         return MessageResponse(message = "Deleted something with id $id")
+    }
+
+    @GetMapping("ai/health")
+    fun aiHealth(): MessageResponse {
+        return try {
+            val request = Request.Builder()
+                .url("https://flask-hello-world-service-698010238719.us-central1.run.app/health")
+                .build()
+
+            val response = aiApiClient.newCall(request).execute()
+
+            MessageResponse(message = response.body?.string() ?: "No response body").also {
+                logger.info("AI service health check response: ${it.message}")
+            }
+        } catch (e: Exception) {
+            MessageResponse(message = "AI service is not healthy")
+        }
+    }
+
+    @GetMapping("ai/hashtag")
+    fun hashtag(): MessageResponse {
+        return try {
+            val succeed = aiService.hashtag("실버 걷기 챌린지")
+            MessageResponse(message = "Hashtags: ${succeed.hashtags.joinToString(", ")}").also {
+                logger.info("AI service hashtag response: ${it.message}")
+            }
+        } catch (e: Exception) {
+            logger.error("AI service hashtag request failed", e)
+            MessageResponse(message = "Failed to get hashtags")
+        }
     }
 }

@@ -29,3 +29,11 @@ Content-Type: application/json
 ### Something 조회
 GET http://localhost:8080/api/something?id={{saved_id}}
 Accept: application/json
+
+### ai server health check
+GET http://localhost:8080/ai/health
+Accept: application/json
+
+### ai server query
+GET http://localhost:8080/ai/hashtag
+Accept: application/json

@@ -22,6 +22,12 @@ dependencies {
     testImplementation("org.testcontainers:gcloud:1.20.1")
     testImplementation(kotlin("test"))
 
+    // okhttp3
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    // jackson
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2")
+
     // Firestore + 테스트용 NoCredentials
     implementation("com.google.cloud:google-cloud-firestore")
 
@@ -36,7 +42,7 @@ dependencies {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 tasks {

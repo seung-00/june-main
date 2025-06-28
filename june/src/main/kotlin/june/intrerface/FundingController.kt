@@ -1,15 +1,21 @@
 package june.intrerface
 
+import june.application.AiService
+import june.application.FundingItem
 import june.domain.Funding
 import june.domain.FundingRepository
+import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(origins = ["*"])
 @RestController
 class FundingController(
-    private val fundingRepository: FundingRepository
+    private val fundingRepository: FundingRepository,
+    private val aiService: AiService
 ) {
+
+    private val logger = LoggerFactory.getLogger(javaClass)
 
     data class CreateFunding(
         val title: String,
@@ -93,5 +99,16 @@ class FundingController(
         val id = fundingRepository.update(updatedFunding)
 
         return ResponseEntity.ok(MessageResponse(id.value))
+    }
+
+    @GetMapping("/api/draft")
+    fun draft(@RequestParam query: String): ResponseEntity<FundingItem> {
+        return try {
+            val fundingItem = aiService.guessFunding(query)
+            ResponseEntity.ok(fundingItem)
+        } catch (e: Exception) {
+            logger.error("Failed to generate draft for query: $query", e)
+            ResponseEntity.internalServerError().build()
+        }
     }
 }

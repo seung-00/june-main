@@ -46,3 +46,7 @@ Content-Type: application/json
   "participantId": "yongjae",
   "fee": 100000
 }
+
+### Get Funding items
+GET http://localhost:8080/api/draft?query=실버 걷기 챌린지 동네 사람들 같이 하고 싶어요!
+Content-Type: application/json
