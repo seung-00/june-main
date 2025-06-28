@@ -12,15 +12,36 @@ class FirestoreConfig {
 
     @Bean
     fun firestore(): Firestore {
-        val credentials = GoogleCredentials.fromStream(ClassPathResource("service-account.json").inputStream)
+        val credentials: GoogleCredentials = if (isCloudRun()) {
+            // Cloud Run 환경: 자동 인증
+            GoogleCredentials.getApplicationDefault()
 
-        val firestore = FirestoreOptions.newBuilder()
+            val credentials = GoogleCredentials.getApplicationDefault()
+
+            val email = try {
+                (credentials as? ServiceAccountCredentials)?.clientEmail ?: "Unknown"
+            } catch (e: Exception) {
+                "Not service account"
+            }
+
+            println("🟢 Using credentials: $email")
+
+        } else {
+            // 로컬 개발환경: json 파일을 통한 인증
+            val inputStream = ClassPathResource("service-account.json").inputStream
+            GoogleCredentials.fromStream(inputStream)
+        }
+
+        return FirestoreOptions.newBuilder()
             .setProjectId("decent-destiny-463614-g6")
             .setDatabaseId("uscode22")
             .setCredentials(credentials)
             .build()
             .service
+    }
 
-        return firestore
+    private fun isCloudRun(): Boolean {
+        // Cloud Run에서는 이 환경변수가 항상 존재함
+        return System.getenv("K_SERVICE") != null
     }
 }
