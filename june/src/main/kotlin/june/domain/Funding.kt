@@ -52,6 +52,7 @@ data class Funding(
 interface FundingRepository {
     fun find(id: Funding.Id): Funding?
     fun findAll(): List<Funding>
+    fun findAllId(): List<String>
     fun save(funding: Funding): Funding.Id
     fun update(funding: Funding): Funding.Id
     fun delete(id: Funding.Id)

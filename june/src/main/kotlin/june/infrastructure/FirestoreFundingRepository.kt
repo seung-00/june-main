@@ -21,6 +21,12 @@ class FirestoreFundingRepository(private val firestore: Firestore) : FundingRepo
         return snapshot.documents.mapNotNull(DocumentSnapshot::toFunding)
     }
 
+    override fun findAllId(): List<String> {
+        val snapshot = firestore.collection(Funding.COLLECTION).get().get()
+
+        return snapshot.documents.map(DocumentSnapshot::getId)
+    }
+
     override fun save(funding: Funding): Funding.Id {
         val docRef = firestore.collection(Funding.COLLECTION).document()
         val id = Funding.Id(docRef.id)

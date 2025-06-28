@@ -55,8 +55,8 @@ class FundingController(
     }
 
     @GetMapping("/api/funding")
-    fun getAllFunding(): ResponseEntity<List<Funding>> {
-        val all = fundingRepository.findAll()
+    fun getAllFunding(): ResponseEntity<List<FundingView>> {
+        val all = fundingRepository.findAll().map(Funding::toView)
 
         return ResponseEntity.ok(all)
     }
@@ -69,7 +69,7 @@ class FundingController(
 
     @DeleteMapping("/api/funding")
     fun deleteAllFunding(): ResponseEntity<Void> {
-        fundingRepository.findAll().forEach { fundingRepository.delete(it.id) }
+        fundingRepository.findAllId().forEach { fundingRepository.delete(Funding.Id(it)) }
         return ResponseEntity.noContent().build()
     }
 
