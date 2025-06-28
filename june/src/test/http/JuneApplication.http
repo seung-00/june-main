@@ -1,0 +1,31 @@
+### Ping test
+GET http://localhost:8080/api/health
+Accept: application/json
+
+###
+
+#### Gemini API 테스트
+#GET http://localhost:8080/api/ai?query=Hello+Gemini
+#Accept: application/json
+
+###
+
+### Something 저장
+POST http://localhost:8080/api/something
+Content-Type: application/json
+
+{
+  "name": "example",
+  "value": 42
+}
+
+> {%
+    client.global.set("saved_id", jsonPath(response.body, "$.id",))
+%}
+
+
+###
+
+### Something 조회
+GET http://localhost:8080/api/something?id={{saved_id}}
+Accept: application/json

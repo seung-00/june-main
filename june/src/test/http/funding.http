@@ -1,0 +1,46 @@
+### Create Funding
+POST http://localhost:8080/api/funding
+Content-Type: application/json
+
+{
+  "title": "테스트 펀딩",
+  "description": "청바지 리디자인 프로젝트",
+  "author": "holden",
+  "age": "20대",
+  "size": "M",
+  "gender": "여성",
+  "region": "서울",
+  "budget": 500000
+}
+
+> {%
+    client.global.set("fundingId", response.body.message)
+%}
+
+###
+
+### Get Funding by ID
+GET http://localhost:8080/api/funding/{{fundingId}}
+
+###
+
+### Get All Fundings
+GET http://localhost:8080/api/funding
+
+###
+
+### Delete Funding
+DELETE http://localhost:8080/api/funding/{{fundingId}}
+
+
+### Delete All Fundings
+DELETE http://localhost:8080/api/funding
+
+### Join Funding
+POST http://localhost:8080/api/funding/{{fundingId}}/join
+Content-Type: application/json
+
+{
+  "participantId": "yongjae",
+  "fee": 100000
+}

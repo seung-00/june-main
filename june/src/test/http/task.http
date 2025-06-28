@@ -1,0 +1,32 @@
+### Create Task
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "title": "test task",
+  "done": false
+}
+
+> {%
+    client.global.set("taskId", jsonPath(response.body, "$",))
+%}
+
+###
+
+### Get Task by ID (replace with actual ID)
+GET http://localhost:8080/tasks/{{taskId}}
+
+###
+
+### Mark Task as Done
+PATCH http://localhost:8080/tasks/{{taskId}}/done
+
+###
+
+### Delete Task
+DELETE http://localhost:8080/tasks/{{taskId}}
+
+###
+
+### List All Tasks
+GET http://localhost:8080/tasks

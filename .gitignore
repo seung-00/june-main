@@ -1,0 +1,21 @@
+# Kotlin/Gradle
+.gradle/
+build/
+**/build/
+out/
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# OS/Editor artifacts
+.DS_Store
+*.log
+
+# Kotlin Classpath Snapshots
+**/classpath-snapshot/
+**/shrunk-classpath-snapshot.bin
+
+**/service-account.json
