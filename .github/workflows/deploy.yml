@@ -47,4 +47,14 @@ jobs:
             --platform=managed \
             --allow-unauthenticated \
             --port=8080 \
-            --timeout=300s
+            --timeout=300s \
+            --service-account=github-action@decent-destiny-463614-g6.iam.gserviceaccount.com
+
+#    gcloud run deploy june-app \
+#    --image=us-central1-docker.pkg.dev/decent-destiny-463614-g6/spring-app-repo/june-app:latest \
+#    --region=us-central1 \
+#    --platform=managed \
+#    --allow-unauthenticated \
+#    --port=8080 \
+#    --timeout=300s \
+#    --service-account=my-cloud-run-sa@decent-destiny-463614-g6.iam.gserviceaccount.com
