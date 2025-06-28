@@ -10,7 +10,9 @@ Content-Type: application/json
   "size": "20",
   "gender": "여성",
   "region": "서울",
-  "budget": 500000
+  "budget": 500000,
+  "imageUrl": "https://sdmntprwestus2.oaiusercontent.com/files/00000000-0c24-61f8-9121-f8169cf73a7e/raw?se=2025-06-28T18%3A17%3A53Z&sp=r&sv=2024-08-04&sr=b&scid=ff08dea8-2a1f-54ed-88ac-c9b8340f72a3&skoid=ea0c7534-f237-4ccd-b7ea-766c4ed977ad&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-06-27T20%3A53%3A37Z&ske=2025-06-28T20%3A53%3A37Z&sks=b&skv=2024-08-04&sig=v53pKThliNAzEpdTzikcDtoXUAQhgdk7PPQM/B71ASo%3D",
+  "hashTags": ["의성", "영포티", "대잔치"]
 }
 
 > {%

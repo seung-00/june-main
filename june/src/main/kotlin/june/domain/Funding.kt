@@ -13,6 +13,7 @@ data class Funding(
     val amount: Int,
     val participants: List<String>,
     val imageUrl: String?,
+    val hashTags: List<String>,
 ) {
     @JvmInline
     value class Id(val value: String)
@@ -32,6 +33,7 @@ data class Funding(
             region: String,
             budget: Int,
             imageUrl: String?,
+            hashTags: List<String>,
         ): Funding = Funding(
             id = UNDEFINED_ID,
             title = title,
@@ -45,6 +47,7 @@ data class Funding(
             participants = mutableListOf(author),
             imageUrl = imageUrl,
             amount = 0,
+            hashTags = hashTags,
         )
     }
 }
