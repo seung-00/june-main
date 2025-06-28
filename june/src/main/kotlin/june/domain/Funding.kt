@@ -1,5 +1,7 @@
 package june.domain
 
+import java.time.Instant
+
 data class Funding(
     val id: Id,
     val title: String,
@@ -14,6 +16,7 @@ data class Funding(
     val participants: List<String>,
     val imageUrl: String?,
     val hashtags: List<String>,
+    val createdAt: Long,
 ) {
     @JvmInline
     value class Id(val value: String)
@@ -48,6 +51,7 @@ data class Funding(
             imageUrl = imageUrl,
             amount = 0,
             hashtags = hashtags,
+            createdAt = Instant.now().epochSecond,
         )
     }
 }

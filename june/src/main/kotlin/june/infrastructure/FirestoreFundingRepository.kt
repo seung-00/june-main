@@ -2,6 +2,7 @@ package june.infrastructure
 
 import com.google.cloud.firestore.DocumentSnapshot
 import com.google.cloud.firestore.Firestore
+import com.google.cloud.firestore.Query
 import june.domain.Funding
 import june.domain.FundingRepository
 import org.springframework.stereotype.Repository
@@ -16,7 +17,11 @@ class FirestoreFundingRepository(private val firestore: Firestore) : FundingRepo
     }
 
     override fun findAll(): List<Funding> {
-        val snapshot = firestore.collection(Funding.COLLECTION).get().get()
+        val snapshot = firestore
+            .collection(Funding.COLLECTION)
+            .orderBy("createdAt", Query.Direction.DESCENDING)
+            .get()
+            .get()
 
         return snapshot.documents.mapNotNull(DocumentSnapshot::toFunding)
     }
@@ -64,6 +69,7 @@ fun DocumentSnapshot.toFunding(): Funding? {
         imageUrl = data["imageUrl"] as String?,
         amount = (data["amount"] as Number).toInt(),
         hashtags = (data["hashtags"] as List<*>).filterIsInstance<String>(),
+        createdAt = (data["createdAt"] as Number).toLong(),
     )
 }
 
@@ -81,4 +87,5 @@ fun Funding.toMap(): Map<String, Any> = mapOf(
     "participants" to participants,
     "imageUrl" to (imageUrl ?: ""),
     "hashtags" to hashtags,
+    "createdAt" to createdAt,
 )

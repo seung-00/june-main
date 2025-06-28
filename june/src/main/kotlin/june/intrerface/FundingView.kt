@@ -16,6 +16,7 @@ data class FundingView(
     val participants: List<String>,
     val imageUrl: String?,
     val hashtags: List<String>,
+    val createdAt: Long,
 )
 
 fun Funding.toView(): FundingView = FundingView(
@@ -32,4 +33,5 @@ fun Funding.toView(): FundingView = FundingView(
     participants = participants,
     imageUrl = if (imageUrl.isNullOrEmpty()) null else imageUrl,
     hashtags = hashtags,
+    createdAt = createdAt,
 )
