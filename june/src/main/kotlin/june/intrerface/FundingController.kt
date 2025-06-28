@@ -88,7 +88,7 @@ class FundingController(
         }
 
         val updatedFunding =
-            funding.copy(participants = funding.participants + body.participantId, amount = funding.budget + body.fee)
+            funding.copy(participants = funding.participants + body.participantId, amount = funding.amount + body.fee)
 
         val id = fundingRepository.update(updatedFunding)
 
