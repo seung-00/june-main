@@ -15,17 +15,6 @@ class FirestoreConfig {
         val credentials: GoogleCredentials = if (isCloudRun()) {
             // Cloud Run 환경: 자동 인증
             GoogleCredentials.getApplicationDefault()
-
-            val credentials = GoogleCredentials.getApplicationDefault()
-
-            val email = try {
-                (credentials as? ServiceAccountCredentials)?.clientEmail ?: "Unknown"
-            } catch (e: Exception) {
-                "Not service account"
-            }
-
-            println("🟢 Using credentials: $email")
-
         } else {
             // 로컬 개발환경: json 파일을 통한 인증
             val inputStream = ClassPathResource("service-account.json").inputStream
